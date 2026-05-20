@@ -136,3 +136,73 @@ p {
 
     <p>📍 VIP Lounge, Los Angeles, CA, United States</p>
 </div>
+<div class="card">
+    <h2>🎰 Daily Jackpot Slot</h2>
+
+    <div class="slot-box">
+        <div class="reel" id="reel1">🍒</div>
+        <div class="reel" id="reel2">💎</div>
+        <div class="reel" id="reel3">🔔</div>
+    </div>
+
+    <br>
+
+    <button class="btn" onclick="spin()">SPIN 🎲</button>
+</div>
+.slot-box {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.reel {
+    width: 70px;
+    height: 70px;
+    background: #111;
+    border: 2px solid #ffcc00;
+    border-radius: 10px;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #ff0066;
+    animation: none;
+}
+
+.spin {
+    animation: spinAnim 0.3s linear infinite;
+}
+
+@keyframes spinAnim {
+    0% { transform: rotateX(0deg); }
+    100% { transform: rotateX(360deg); }
+}
+<script>
+function spin() {
+    const symbols = ["🍒", "💎", "🔔", "🍋", "⭐", "7️⃣"];
+
+    let r1 = document.getElementById("reel1");
+    let r2 = document.getElementById("reel2");
+    let r3 = document.getElementById("reel3");
+
+    r1.classList.add("spin");
+    r2.classList.add("spin");
+    r3.classList.add("spin");
+
+    let interval = setInterval(() => {
+        r1.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        r2.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        r3.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    }, 100);
+
+    setTimeout(() => {
+        clearInterval(interval);
+
+        r1.classList.remove("spin");
+        r2.classList.remove("spin");
+        r3.classList.remove("spin");
+
+    }, 2000);
+}
+</script>
