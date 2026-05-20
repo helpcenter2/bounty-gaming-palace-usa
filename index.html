@@ -15,7 +15,7 @@ body {
     background: radial-gradient(circle at top, #1a1a2e, #0b0b1a);
 }
 
-/* Animated glowing background */
+/* Animated background */
 body::before {
     content: "";
     position: fixed;
@@ -23,13 +23,7 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(
-        45deg,
-        #ffcc00,
-        #ff0066,
-        #00c3ff,
-        #ffcc00
-    );
+    background: linear-gradient(45deg,#ffcc00,#ff0066,#00c3ff,#ffcc00);
     background-size: 400% 400%;
     animation: casinoGlow 10s linear infinite;
     opacity: 0.15;
@@ -37,30 +31,33 @@ body::before {
 }
 
 @keyframes casinoGlow {
-    0% { transform: rotate(0deg); background-position: 0% 50%; }
+    0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-    100% { transform: rotate(360deg); background-position: 0% 50%; }
+    100% { background-position: 0% 50%; }
 }
-header {<div style="font-size:20px; margin-top:10px;">
-✨ 🎰 💰 ✨ 🎰 💰 ✨
-</div>
+
+/* Header */
+header {
     background: linear-gradient(90deg, #ffcc00, #ff0066);
     padding: 25px;
 }
 
-h1 {
-    margin: 0;
-    font-size: 32px;
-}
-
-p {
-    color: #ccc;
-}
-
+/* Layout */
 .container {
     padding: 40px;
 }
 
+/* Cards */
+.card {
+    background: #1a1a2e;
+    padding: 20px;
+    margin: 20px auto;
+    width: 85%;
+    max-width: 500px;
+    border-radius: 15px;
+}
+
+/* Buttons */
 .btn {
     display: inline-block;
     margin-top: 20px;
@@ -77,78 +74,7 @@ p {
     color: black;
 }
 
-.card {
-    background: #1a1a2e;
-    padding: 20px;
-    margin: 20px auto;
-    width: 80%;
-    border-radius: 15px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <h1>🎰 Bounty Gaming Palace USA 🎰</h1>
-    <p>Welcome to the ultimate gaming & entertainment hub</p>
-</header>
-
-<div class="container">
-
-    <div class="card">
-        <h2>🔥 Join Our Community</h2>
-      <a class="btn" href="https://www.facebook.com/BountyGamingPalaceUSA/" target="_blank">
-    Visit Facebook Page
-</a>
-    </div>
-
-    <div class="card">
-        <h2>🎮 Features</h2>
-        <p>✔ Gaming Updates</p>
-        <p>✔ Casino News</p>
-        <p>✔ Entertainment Content</p>
-    </div>
-
-    <div class="card">
-        <h2>📩 Contact</h2>
-        <p>For collaboration or inquiries, connect via Facebook</p>
-    </div>
-
-</div>
-
-</body>
-</html>
-<div class="card">
-    <h2>📱 Contact & Join Us</h2>
-
-    <a class="btn" href="https://wa.me/14244414732" target="_blank">
-        💬 Chat on WhatsApp
-    </a>
-
-    <br><br>
-
-    <a class="btn" href="https://www.facebook.com/BountyGamingPalaceUSA/" target="_blank">
-        🔵 Visit Facebook Page
-    </a>
-
-    <br><br>
-
-    <p>📍 VIP Lounge, Los Angeles, CA, United States</p>
-</div>
-<div class="card">
-    <h2>🎰 Daily Jackpot Slot</h2>
-
-    <div class="slot-box">
-        <div class="reel" id="reel1">🍒</div>
-        <div class="reel" id="reel2">💎</div>
-        <div class="reel" id="reel3">🔔</div>
-    </div>
-
-    <br>
-
-    <button class="btn" onclick="spin()">SPIN 🎲</button>
-</div>
+/* Slot machine */
 .slot-box {
     display: flex;
     justify-content: center;
@@ -166,8 +92,6 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px #ff0066;
-    animation: none;
 }
 
 .spin {
@@ -178,9 +102,70 @@ p {
     0% { transform: rotateX(0deg); }
     100% { transform: rotateX(360deg); }
 }
+
+/* Floating WhatsApp */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    padding: 15px 18px;
+    border-radius: 50%;
+    font-size: 20px;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎰 Bounty Gaming Palace USA 🎰</h1>
+    <p>Welcome to the ultimate gaming & entertainment hub</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🔥 Join Our Facebook</h2>
+        <a class="btn" href="https://www.facebook.com/BountyGamingPalaceUSA/" target="_blank">
+            Visit Facebook Page
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>📱 Contact</h2>
+
+        <a class="btn" href="https://wa.me/14244414732" target="_blank">
+            Chat on WhatsApp
+        </a>
+
+        <br><br>
+
+        <p>📍 VIP Lounge, Los Angeles, CA, United States</p>
+    </div>
+
+    <div class="card">
+        <h2>🎰 Daily Jackpot Slot</h2>
+
+        <div class="slot-box">
+            <div class="reel" id="reel1">🍒</div>
+            <div class="reel" id="reel2">💎</div>
+            <div class="reel" id="reel3">🔔</div>
+        </div>
+
+        <button class="btn" onclick="spin()">SPIN 🎲</button>
+    </div>
+
+</div>
+
+<!-- Floating WhatsApp -->
+<a class="whatsapp" href="https://wa.me/14244414732" target="_blank">💬</a>
+
 <script>
 function spin() {
-    const symbols = ["🍒", "💎", "🔔", "🍋", "⭐", "7️⃣"];
+    const symbols = ["🍒","💎","🔔","🍋","⭐","7️⃣"];
 
     let r1 = document.getElementById("reel1");
     let r2 = document.getElementById("reel2");
@@ -191,18 +176,19 @@ function spin() {
     r3.classList.add("spin");
 
     let interval = setInterval(() => {
-        r1.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-        r2.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-        r3.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        r1.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+        r2.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+        r3.innerText = symbols[Math.floor(Math.random()*symbols.length)];
     }, 100);
 
     setTimeout(() => {
         clearInterval(interval);
-
         r1.classList.remove("spin");
         r2.classList.remove("spin");
         r3.classList.remove("spin");
-
     }, 2000);
 }
 </script>
+
+</body>
+</html>
