@@ -9,12 +9,41 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #0b0b1a;
     color: white;
     text-align: center;
+    overflow-x: hidden;
+    background: radial-gradient(circle at top, #1a1a2e, #0b0b1a);
 }
 
-header {
+/* Animated glowing background */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        #ffcc00,
+        #ff0066,
+        #00c3ff,
+        #ffcc00
+    );
+    background-size: 400% 400%;
+    animation: casinoGlow 10s linear infinite;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+@keyframes casinoGlow {
+    0% { transform: rotate(0deg); background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { transform: rotate(360deg); background-position: 0% 50%; }
+}
+header {<div style="font-size:20px; margin-top:10px;">
+✨ 🎰 💰 ✨ 🎰 💰 ✨
+</div>
     background: linear-gradient(90deg, #ffcc00, #ff0066);
     padding: 25px;
 }
