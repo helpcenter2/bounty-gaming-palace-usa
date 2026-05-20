@@ -11,11 +11,11 @@ body {
     font-family: Arial, sans-serif;
     color: white;
     text-align: center;
-    overflow-x: hidden;
     background: radial-gradient(circle at top, #1a1a2e, #0b0b1a);
+    overflow-x: hidden;
 }
 
-/* Animated background */
+/* Neon animated background */
 body::before {
     content: "";
     position: fixed;
@@ -25,53 +25,56 @@ body::before {
     height: 200%;
     background: linear-gradient(45deg,#ffcc00,#ff0066,#00c3ff,#ffcc00);
     background-size: 400% 400%;
-    animation: casinoGlow 10s linear infinite;
+    animation: glow 12s linear infinite;
     opacity: 0.15;
     z-index: -1;
 }
 
-@keyframes casinoGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes glow {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
 }
 
 /* Header */
 header {
+    padding: 30px;
     background: linear-gradient(90deg, #ffcc00, #ff0066);
-    padding: 25px;
+    box-shadow: 0 0 20px #ff0066;
 }
 
 /* Layout */
 .container {
-    padding: 40px;
+    padding: 30px;
 }
 
 /* Cards */
 .card {
-    background: #1a1a2e;
+    background: rgba(255,255,255,0.05);
     padding: 20px;
     margin: 20px auto;
-    width: 85%;
+    width: 90%;
     max-width: 500px;
     border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
 }
 
 /* Buttons */
 .btn {
     display: inline-block;
-    margin-top: 20px;
-    padding: 15px 25px;
-    background: #ff0066;
-    color: white;
+    margin-top: 15px;
+    padding: 14px 25px;
+    background: linear-gradient(45deg,#ff0066,#ffcc00);
+    color: black;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .btn:hover {
-    background: #ffcc00;
-    color: black;
+    transform: scale(1.1);
 }
 
 /* Slot machine */
@@ -114,6 +117,35 @@ header {
     border-radius: 50%;
     font-size: 20px;
     text-decoration: none;
+    box-shadow: 0 0 10px #25D366;
+}
+
+/* WIN POPUP */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: black;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid gold;
+    display: none;
+    z-index: 999;
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: gold;
+    top: 0;
+    animation: fall 2s linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); }
 }
 </style>
 </head>
@@ -122,37 +154,33 @@ header {
 
 <header>
     <h1>🎰 Bounty Gaming Palace USA 🎰</h1>
-    <p>Welcome to the ultimate gaming & entertainment hub</p>
+    <p>VIP Casino & Entertainment Experience</p>
 </header>
 
 <div class="container">
 
     <div class="card">
-        <h2>🔥 Join Our Facebook</h2>
+        <h2>🔥 Join Facebook</h2>
         <a class="btn" href="https://www.facebook.com/BountyGamingPalaceUSA/" target="_blank">
-            Visit Facebook Page
+            Visit Page
         </a>
     </div>
 
     <div class="card">
         <h2>📱 Contact</h2>
-
         <a class="btn" href="https://wa.me/14244414732" target="_blank">
-            Chat on WhatsApp
+            WhatsApp Us
         </a>
-
-        <br><br>
-
-        <p>📍 VIP Lounge, Los Angeles, CA, United States</p>
+        <p>📍 VIP Lounge, Los Angeles, USA</p>
     </div>
 
     <div class="card">
-        <h2>🎰 Daily Jackpot Slot</h2>
+        <h2>🎰 Slot Machine</h2>
 
         <div class="slot-box">
-            <div class="reel" id="reel1">🍒</div>
-            <div class="reel" id="reel2">💎</div>
-            <div class="reel" id="reel3">🔔</div>
+            <div class="reel" id="r1">🍒</div>
+            <div class="reel" id="r2">💎</div>
+            <div class="reel" id="r3">🔔</div>
         </div>
 
         <button class="btn" onclick="spin()">SPIN 🎲</button>
@@ -163,13 +191,18 @@ header {
 <!-- Floating WhatsApp -->
 <a class="whatsapp" href="https://wa.me/14244414732" target="_blank">💬</a>
 
+<!-- WIN POPUP -->
+<div class="popup" id="popup">
+    🎉 JACKPOT WIN! 🎉
+</div>
+
 <script>
 function spin() {
     const symbols = ["🍒","💎","🔔","🍋","⭐","7️⃣"];
 
-    let r1 = document.getElementById("reel1");
-    let r2 = document.getElementById("reel2");
-    let r3 = document.getElementById("reel3");
+    let r1 = document.getElementById("r1");
+    let r2 = document.getElementById("r2");
+    let r3 = document.getElementById("r3");
 
     r1.classList.add("spin");
     r2.classList.add("spin");
@@ -186,7 +219,28 @@ function spin() {
         r1.classList.remove("spin");
         r2.classList.remove("spin");
         r3.classList.remove("spin");
+
+        showWin();
     }, 2000);
+}
+
+function showWin() {
+    let popup = document.getElementById("popup");
+    popup.style.display = "block";
+
+    for (let i = 0; i < 30; i++) {
+        let c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = ["#ffcc00","#ff0066","#00c3ff"][Math.floor(Math.random()*3)];
+        document.body.appendChild(c);
+
+        setTimeout(() => c.remove(), 2000);
+    }
+
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 2500);
 }
 </script>
 
